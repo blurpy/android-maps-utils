@@ -312,6 +312,10 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
         return cluster.getSize() > mMinClusterSize;
     }
 
+    protected boolean shouldRenderAsClusterForAnimation(Cluster<T> cluster) {
+        return shouldRenderAsCluster(cluster);
+    }
+
     /**
      * Transforms the current view (represented by DefaultClusterRenderer.mClusters and DefaultClusterRenderer.mZoom) to a
      * new zoom level and set of clusters.
@@ -821,7 +825,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
 
         private void perform(MarkerModifier markerModifier) {
             // Don't show small clusters. Render the markers inside, instead.
-            if (!shouldRenderAsCluster(cluster)) {
+            if (!shouldRenderAsClusterForAnimation(cluster)) {
                 for (T item : cluster.getItems()) {
                     Marker marker = mMarkerCache.get(item);
                     MarkerWithPosition markerWithPosition;

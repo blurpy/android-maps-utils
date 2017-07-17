@@ -39,6 +39,11 @@ public class ClusteringDemoActivity extends BaseDemoActivity {
         getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.503186, -0.126446), 10));
 
         mClusterManager = new ClusterManager<MyItem>(this, getMap());
+
+        // Switch between these two renderers to see the difference
+        mClusterManager.setRenderer(new CustomAnimationNotWorkingClusterRenderer<MyItem>(this, getMap(), mClusterManager));
+//        mClusterManager.setRenderer(new CustomAnimationWorkingClusterRenderer<MyItem>(this, getMap(), mClusterManager));
+
         getMap().setOnCameraIdleListener(mClusterManager);
 
         try {
